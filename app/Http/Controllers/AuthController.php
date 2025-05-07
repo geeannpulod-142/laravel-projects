@@ -22,15 +22,9 @@ class AuthController extends Controller
             return redirect()->route('products.index');
         }
 
-        // Instead of showing error, create a new user and log them in
-        $user = User::create([
-            'name' => $request->email,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-
-        Auth::login($user);
-        return redirect()->route('products.index');
+        return back()->withErrors([
+            'email' => 'Invalid password',
+        ])->withInput($request->only('email'));
     }
 
     public function logout()
@@ -58,8 +52,6 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        Auth::login($user);
-
-        return redirect('/dashboard');
+        return redirect()->route('login')->with('success', 'Registration successful! Please login.');
     }
 }

@@ -7,7 +7,7 @@
 scale=1.0">
 
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Simple Laravel 11 CRUD Application Tutorial</title>
+<title></title>
 <link rel="stylesheet"
 href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.
 min.css">
@@ -19,8 +19,7 @@ icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
 <div class="container">
-<h3 class=" mt-3">Simple Laravel 11 CRUD Application
-Tutorial</h3>
+<h3 class=" mt-3"></h3>
 @yield('content')
 <div class="row justify-content-center text-center mt-3">
 <div class="col-md-12">
