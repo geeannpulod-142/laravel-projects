@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 class UpdateProductRequest extends FormRequest
 {
 /**
@@ -19,12 +21,27 @@ return true;
 public function rules(): array
 {
 return [
-'code' =>
-'required|string|max:50|unique:products,code,'.$this->product->id,
+'code' => ['required', 'string', 'max:50', Rule::unique('products')->ignore($this->product->id)],
 'name' => 'required|string|max:250',
 'quantity' => 'required|integer|min:1|max:10000',
 'price' => 'required',
-'description' => 'nullable|string'
+'description' => 'nullable|string',
+'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+'delete_image' => 'nullable|boolean'
 ];
+}
+
+/**
+ * Get custom messages for validator errors.
+ *
+ * @return array
+ */
+public function messages(): array
+{
+    return [
+        'image.image' => 'The file must be an image.',
+        'image.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif.',
+        'image.max' => 'The image may not be greater than 2MB.'
+    ];
 }
 }

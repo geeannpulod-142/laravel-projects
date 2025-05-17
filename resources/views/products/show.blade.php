@@ -63,6 +63,25 @@ start"><strong>Description:</strong></label>
 {{ $product->description }}
 </div>
 </div>
+{{-- Product Image Section --}}
+@if($product->image)
+<div class="row mt-4">
+    <label class="col-md-4 col-form-label text-md-end text-start"><strong>Product Image:</strong></label>
+    <div class="col-md-6">
+        <img src="{{ asset('storage/' . $product->image) }}" 
+             alt="Product Image" 
+             class="img-fluid rounded"
+             style="max-width: 300px; max-height: 300px; object-fit: contain; border: 1px solid #ddd;">
+    </div>
+</div>
+@else
+<div class="row mt-4">
+    <label class="col-md-4 col-form-label text-md-end text-start"><strong>Product Image:</strong></label>
+    <div class="col-md-6" style="line-height: 35px;">
+        <span class="text-muted">No image uploaded for this product.</span>
+    </div>
+</div>
+@endif
 </div>
 </div>
 </div>

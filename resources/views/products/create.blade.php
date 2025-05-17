@@ -14,7 +14,7 @@ btn-primary btn-sm">&larr; Back</a>
 </div>
 <div class="card-body">
 <form action="{{ route('products.store') }}"
-method="post">
+method="post" enctype="multipart/form-data">
 @csrf
 <div class="mb-3 row">
 
@@ -93,14 +93,42 @@ name="description">{{ old('description') }}</textarea>
 </div>
 
 <div class="mb-3 row">
-
-<input type="submit" class="col-md-3 offset-
-md-5 btn btn-primary" value="Add Product">
-
+    <div class="col-md-6 offset-md-4 d-flex align-items-start gap-4">
+        <div class="d-flex align-items-center gap-2">
+            <input type="submit" class="btn btn-primary" value="Add Product">
+            <label class="btn btn-outline-secondary mb-0">
+                Upload Image <input type="file" name="image" id="image" accept="image/*" hidden onchange="previewImage(this)">
+            </label>
+        </div>
+        <div id="imagePreview" style="display: none;">
+            <img id="preview" src="#" alt="Image Preview" style="max-width: 200px; max-height: 200px; object-fit: contain; border: 1px solid #ddd; border-radius: 4px;">
+        </div>
+    </div>
 </div>
 </form>
 </div>
 </div>
 </div>
 </div>
+
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('preview');
+    const previewContainer = document.getElementById('imagePreview');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            previewContainer.style.display = 'block';
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.src = '#';
+        previewContainer.style.display = 'none';
+    }
+}
+</script>
 @endsection
